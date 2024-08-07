@@ -33,6 +33,12 @@
       "@modules/*": [
         "src/app/modules/*"
       ],
+      "@domain/*": [
+        "src/app/domain/*"
+      ],
+      "@services/*": [
+        "src/app/services/*"
+      ],
     }
   },
   "angularCompilerOptions": {
