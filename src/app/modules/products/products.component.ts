@@ -33,6 +33,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ) {
   }
 
+  price(price: number): string {
+    return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(price);
+  }
+
   ngOnInit(): void {
     this.productService.list()
       .pipe(takeUntil(this.destroy$))
