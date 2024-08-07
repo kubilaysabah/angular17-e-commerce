@@ -6,6 +6,8 @@ import { Subject, takeUntil } from "rxjs";
 import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
+import { SkeletonModule } from 'primeng/skeleton';
+
 
 import { Product } from '@domain/product';
 import ProductService from '@services/product.service';
@@ -18,6 +20,7 @@ import ProductService from '@services/product.service';
     DataViewModule,
     ButtonModule,
     TagModule,
+    SkeletonModule
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -26,11 +29,16 @@ import ProductService from '@services/product.service';
 export class ProductsComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
+  layout: 'list' | 'grid' = 'list';
   products: Product[] = [];
 
   constructor(
     private productService: ProductService,
   ) {
+  }
+
+  counterArray(n: number): any[] {
+    return Array(n);
   }
 
   price(price: number): string {
