@@ -8,25 +8,27 @@
       </ng-template>
       <ng-template pTemplate="list" let-products>
         <div class="grid grid-nogutter">
-          <div class="col-12" *ngFor="let i of counterArray(6); let first = first" class="col-12">
-            <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" [ngClass]="{ 'border-top-1 surface-border': !first }">
-              <p-skeleton styleClass="w-9 sm:w-16rem xl:w-10rem h-6rem block xl:block mx-auto border-round" />
-              <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
-                <div class="flex flex-column align-items-center sm:align-items-start gap-3">
-                  <p-skeleton styleClass="w-8rem border-round h-2rem" />
-                  <p-skeleton styleClass="w-6rem border-round h-1rem" />
-                  <div class="flex align-items-center gap-3">
+          @for (i of counterArray(6); let first = $first; track i) {
+            <div class="col-12"  class="col-12">
+              <div class="flex flex-column xl:flex-row xl:align-items-start p-4 gap-4" [ngClass]="{ 'border-top-1 surface-border': !first }">
+                <p-skeleton styleClass="w-9 sm:w-16rem xl:w-10rem h-6rem block xl:block mx-auto border-round" />
+                <div class="flex flex-column sm:flex-row justify-content-between align-items-center xl:align-items-start flex-1 gap-4">
+                  <div class="flex flex-column align-items-center sm:align-items-start gap-3">
+                    <p-skeleton styleClass="w-8rem border-round h-2rem" />
                     <p-skeleton styleClass="w-6rem border-round h-1rem" />
-                    <p-skeleton styleClass="w-3rem border-round h-1rem" />
+                    <div class="flex align-items-center gap-3">
+                      <p-skeleton styleClass="w-6rem border-round h-1rem" />
+                      <p-skeleton styleClass="w-3rem border-round h-1rem" />
+                    </div>
                   </div>
-                </div>
-                <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
-                  <p-skeleton styleClass="w-4rem border-round h-2rem" />
-                  <p-skeleton shape="circle" styleClass="w-3rem h-3rem" />
+                  <div class="flex sm:flex-column align-items-center sm:align-items-end gap-3 sm:gap-2">
+                    <p-skeleton styleClass="w-4rem border-round h-2rem" />
+                    <p-skeleton shape="circle" styleClass="w-3rem h-3rem" />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          }
         </div>
       </ng-template>
       <ng-template let-product pTemplate="grid" let-products>
