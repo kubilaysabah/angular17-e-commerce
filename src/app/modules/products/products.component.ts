@@ -2,6 +2,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
 
 // prime ng
@@ -9,6 +10,7 @@ import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { SkeletonModule } from 'primeng/skeleton';
+import { DropdownModule } from 'primeng/dropdown';
 
 // libraries
 import slugify from "slugify";
@@ -27,6 +29,7 @@ import ProductService from '@services/product.service';
     ButtonModule,
     TagModule,
     SkeletonModule,
+    DropdownModule,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -35,7 +38,6 @@ import ProductService from '@services/product.service';
 export class ProductsComponent implements OnInit, OnDestroy {
   private destroy$: Subject<void> = new Subject<void>();
 
-  layout: 'list' | 'grid' = 'list';
   products: Product[] = [];
 
   constructor(
@@ -63,7 +65,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
     return `${slug}-p-${id}`;
   }
 
-  ngOnInit(): void {
+  getProducts(): void {
     this.productService.list()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
@@ -74,6 +76,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
           console.log(error);
         }
       })
+  }
+
+  ngOnInit(): void {
+    this.getProducts();
   }
 
   ngOnDestroy(): void {

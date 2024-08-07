@@ -1,11 +1,6 @@
 @if (products.length === 0) {
   <div class="card">
-    <p-dataView #dv [value]="products" [layout]="layout">
-      <ng-template pTemplate="header">
-        <div class="flex justify-content-end">
-          <p-dataViewLayoutOptions />
-        </div>
-      </ng-template>
+    <p-dataView #dv [value]="products">
       <ng-template pTemplate="list" let-products>
         <div class="grid grid-nogutter">
           @for (i of counterArray(6); let first = $first; track i) {
@@ -64,7 +59,6 @@
               <div class="flex flex-column sm:flex-row sm:align-items-center p-4 gap-3" [ngClass]="{ 'border-top-1 surface-border': !first }">
                 <div class="md:w-10rem relative">
                   <img class="block xl:block mx-auto border-round w-full" [src]="product.productImage[0]" [alt]="product.productName" />
-                  <p-tag [value]="'in stock'" [severity]="'success'" class="absolute" [style.left.px]="4" [style.top.px]="4" />
                 </div>
                 <div class="flex flex-column md:flex-row justify-content-between md:align-items-center flex-1 gap-4">
                   <div class="flex flex-row md:flex-column justify-content-between align-items-start gap-2">
@@ -72,12 +66,6 @@
                       <h2 class="text-lg font-medium text-900 mt-2">{{ product.productName }}</h2>
                       <p class="font-medium text-secondary text-sm" *ngIf="product.productDescription.description">{{ product.productDescription.description }}</p>
                     </article>
-                    <div class="surface-100 p-1" style="border-radius: 30px">
-                      <div class="surface-0 flex align-items-center gap-2 justify-content-center py-1 px-2" style="border-radius: 30px; box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.04), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)">
-                        <span class="text-900 font-medium text-sm">{{ 4.5 }}</span>
-                        <i class="pi pi-star-fill text-yellow-500"></i>
-                      </div>
-                    </div>
                   </div>
                   <div class="flex flex-column md:align-items-end gap-5">
                     <span class="text-xl font-semibold text-900">{{ price(product.productPrice) }}</span>
