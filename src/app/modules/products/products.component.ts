@@ -1,14 +1,19 @@
-
+// angular
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from "@angular/router";
 import { Subject, takeUntil } from "rxjs";
 
+// prime ng
 import { DataViewModule } from 'primeng/dataview';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { SkeletonModule } from 'primeng/skeleton';
 
+// libraries
+import slugify from "slugify";
 
+// other
 import { Product } from '@domain/product';
 import ProductService from '@services/product.service';
 
@@ -17,10 +22,11 @@ import ProductService from '@services/product.service';
   standalone: true,
   imports: [
     CommonModule,
+    RouterLink,
     DataViewModule,
     ButtonModule,
     TagModule,
-    SkeletonModule
+    SkeletonModule,
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
@@ -43,6 +49,18 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   price(price: number): string {
     return new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY' }).format(price);
+  }
+
+  slug(name: string, id: string): string {
+    const slug = slugify(name, {
+      trim: true,
+      lower: true,
+      locale: 'tr',
+      strict: true,
+      replacement: '-'
+    })
+
+    return `${slug}-p-${id}`;
   }
 
   ngOnInit(): void {
