@@ -2,7 +2,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from "@angular/router";
-import { FormsModule } from "@angular/forms";
 import { Subject, takeUntil } from "rxjs";
 
 // prime ng
@@ -16,7 +15,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import slugify from "slugify";
 
 // other
-import { Product } from '@domain/product';
+import Product from '@domain/product';
 import ProductService from '@services/product.service';
 
 @Component({
@@ -71,9 +70,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (products) => {
           this.products = products;
+          // this.appSubject.message = { type: 'success', title: 'Başarılı!', description: 'Ürünler listeleniyor...' }
         },
         error: (error) => {
-          console.log(error);
+          // this.appSubject.message = { type: 'error', title: 'Hata!', description: 'hata' }
         }
       })
   }
