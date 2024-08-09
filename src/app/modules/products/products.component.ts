@@ -20,7 +20,7 @@ import Product from '@domain/product';
 import ProductService from '@services/product.service';
 
 // states
-import { addFavorite } from '@states/favorites/favorites.actions'
+import { addFavorite, removeFavorite } from '@states/favorites/favorites.actions'
 import { selectFavoriteById } from '@states/favorites/favorites.selectors'
 
 @Component({
@@ -71,6 +71,11 @@ export class ProductsComponent implements OnInit, OnDestroy {
   }
 
   addFavorite(product: Product): void {
+    if (this.isFavorite(product.productId)) {
+      this.store.dispatch(removeFavorite({ id: product.productId }))
+      return;
+    }
+
     this.store.dispatch(addFavorite({ id: product.productId, data: product }))
   }
 

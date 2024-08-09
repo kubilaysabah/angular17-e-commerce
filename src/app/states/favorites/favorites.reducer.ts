@@ -10,12 +10,15 @@ export const initialState: State = {}
 
 export const favoritesReducer = createReducer(
   initialState,
-  on(FavoritesActions.addFavorite, (state, { id, data }) => ({
-    ...state,
-    [id]: data
-  })),
+  on(FavoritesActions.addFavorite, (state, { id, data }) => {
+    return {
+      ...state,
+      [id]: data
+    }
+  }),
   on(FavoritesActions.removeFavorite, (state, { id }) => {
-    delete state[id]
-    return state;
+    const obj = { ...state };
+    delete obj[id]
+    return obj;
   })
 )
