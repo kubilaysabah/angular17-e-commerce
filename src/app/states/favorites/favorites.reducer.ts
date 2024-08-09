@@ -14,10 +14,6 @@ export const favoritesReducer = createReducer(
     ...state,
     [id]: data
   })),
-  on(FavoritesActions.updateFavorite, (state, { id, data }) => ({
-    ...state,
-    [id]: data
-  })),
   on(FavoritesActions.removeFavorite, (state, { id }) => {
     delete state[id]
     return state;

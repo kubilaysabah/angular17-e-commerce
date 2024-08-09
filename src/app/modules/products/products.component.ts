@@ -21,7 +21,7 @@ import ProductService from '@services/product.service';
 
 // states
 import { addFavorite } from '@states/favorites/favorites.actions'
-import { selectFavorites, selectFavoriteById } from '@states/favorites/favorites.selectors'
+import { selectFavoriteById } from '@states/favorites/favorites.selectors'
 
 @Component({
   selector: 'app-products',
@@ -72,6 +72,21 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   addFavorite(product: Product): void {
     this.store.dispatch(addFavorite({ id: product.productId, data: product }))
+  }
+
+  isFavorite(id: string): boolean {
+    let value = false;
+
+    this.store.select(selectFavoriteById(id))
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((product) => {
+        if (product) {
+          value = true;
+          return;
+        }
+      })
+
+    return value;
   }
 
   getProducts(): void {
