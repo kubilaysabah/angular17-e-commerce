@@ -2,6 +2,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from "@angular/router";
+import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from "rxjs";
 
 // prime ng
@@ -17,6 +18,10 @@ import slugify from "slugify";
 // other
 import Product from '@domain/product';
 import ProductService from '@services/product.service';
+
+// states
+import { addFavorite } from '@states/favorites/favorites.actions'
+import { selectFavorites, selectFavoriteById } from '@states/favorites/favorites.selectors'
 
 @Component({
   selector: 'app-products',
@@ -40,6 +45,7 @@ export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
 
   constructor(
+    private store: Store,
     private productService: ProductService,
   ) {
   }
@@ -62,6 +68,10 @@ export class ProductsComponent implements OnInit, OnDestroy {
     })
 
     return `${slug}-p-${id}`;
+  }
+
+  addFavorite(product: Product): void {
+    this.store.dispatch(addFavorite({ id: product.productId, data: product }))
   }
 
   getProducts(): void {

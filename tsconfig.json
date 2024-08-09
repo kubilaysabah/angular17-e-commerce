@@ -39,6 +39,9 @@
       "@services/*": [
         "src/app/services/*"
       ],
+      "@states/*": [
+        "src/app/states/*"
+      ]
     }
   },
   "angularCompilerOptions": {
