@@ -15,8 +15,10 @@ import { DropdownModule } from 'primeng/dropdown';
 // libraries
 import slugify from "slugify";
 
-// other
+// domain
 import Product from '@domain/product';
+
+// services
 import ProductService from '@services/product.service';
 
 // states
